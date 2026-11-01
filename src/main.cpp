@@ -229,25 +229,25 @@ namespace {
 // Hooks: redirect the requested sound to the custom file
 // ---------------------------------------------------------------------------
 class $modify(CSAudioEngine, FMODAudioEngine) {
-    int playEffect(std::string path, float speed, float unknown, float volume) {
-        return FMODAudioEngine::playEffect(redirect(path), speed, unknown, volume);
+    int playEffect(gd::string path, float speed, float unknown, float volume) {
+        return FMODAudioEngine::playEffect(redirect(std::string(path)), speed, unknown, volume);
     }
 
     int playEffectAdvanced(
-        std::string path, float speed, float unknown, float volume, float pitch,
+        gd::string path, float speed, float unknown, float volume, float pitch,
         bool fastFourierTransform, bool reverb, int startMillis, int endMillis,
         int fadeIn, int fadeOut, bool loopEnabled, int effectID, bool overrideSound,
         bool noPreload, int channelID, int uniqueID, float minInterval, int sfxGroup
     ) {
         return FMODAudioEngine::playEffectAdvanced(
-            redirect(path), speed, unknown, volume, pitch, fastFourierTransform, reverb,
+            redirect(std::string(path)), speed, unknown, volume, pitch, fastFourierTransform, reverb,
             startMillis, endMillis, fadeIn, fadeOut, loopEnabled, effectID, overrideSound,
             noPreload, channelID, uniqueID, minInterval, sfxGroup
         );
     }
 
-    void playMusic(std::string path, bool shouldLoop, float fadeInTime, int channel) {
-        FMODAudioEngine::playMusic(redirect(path), shouldLoop, fadeInTime, channel);
+    void playMusic(gd::string path, bool shouldLoop, float fadeInTime, int channel) {
+        FMODAudioEngine::playMusic(redirect(std::string(path)), shouldLoop, fadeInTime, channel);
     }
 };
 
