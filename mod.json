@@ -1,0 +1,18 @@
+{
+	"geode": "5.11.2",
+	"gd": {
+		"win": "2.2091",
+		"android": "2.2091",
+		"mac": "2.2091",
+		"ios": "2.2091"
+	},
+	"id": "semen0502psa.custom-sounds",
+	"name": "Custom sounds",
+	"version": "v1.0.0",
+	"developer": "semen0502psa",
+	"description": "Replace any Geometry Dash sound with your own file.",
+	"tags": ["music", "customization", "utility"],
+	"resources": {
+		"spritesheets": {}
+	}
+}
