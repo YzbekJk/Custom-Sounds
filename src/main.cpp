@@ -104,7 +104,8 @@ namespace {
             std::string orig = line.substr(0, tab);
             std::string file = line.substr(tab + 1);
             auto full = soundsDir() / file;
-            if (!asp::fs::exists(full)) continue; // file was deleted by hand
+            std::error_code existsEc;
+            if (!std::filesystem::exists(full, existsEc)) continue; // file was deleted by hand
 
             s.stored[orig] = file;
             s.active[orig] = full.string();
@@ -136,13 +137,14 @@ namespace {
     void removeStoredFileLocked(SoundStore& s, std::string const& name) {
         auto it = s.stored.find(name);
         if (it == s.stored.end()) return;
-        (void) asp::fs::remove(soundsDir() / it->second);
+        std::error_code removeEc;
+        std::filesystem::remove(soundsDir() / it->second, removeEc);
         s.stored.erase(it);
         s.active.erase(name);
     }
 
     // Returns an empty string on success, otherwise an error message
-    std::string setReplacement(std::string const& name, asp::fs::Path const& source) {
+    std::string setReplacement(std::string const& name, std::filesystem::path const& source) {
         ensureLoaded();
 
         auto bytes = geode::utils::file::readBinary(source);
